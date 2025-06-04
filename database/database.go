@@ -20,5 +20,5 @@ func Connect() {
 
 	DB=db
 
-	db.AutoMigrate(&models.Shortsy{})
+	db.AutoMigrate(&model.Shortsy{})
 }
