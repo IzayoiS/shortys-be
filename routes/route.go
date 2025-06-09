@@ -8,4 +8,5 @@ import (
 
 func RouterApp(c*fiber.App){
 	c.Post("/",controller.PostLink)
+	c.Get("/:shortCode",controller.GetLink)
 }

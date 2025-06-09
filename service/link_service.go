@@ -20,3 +20,13 @@ func PostLink(original_url string)(*model.Shortsy,error){
 	}
 	return newUrl,nil
 }
+
+func GetLink(shortCode string) (*model.Shortsy,error){
+	var shortLink model.Shortsy
+	result := database.DB.Where("short_code = ?",shortCode).First(&shortLink)
+
+	if result.Error != nil {
+		return nil,result.Error
+	}
+	return &shortLink,nil
+}
