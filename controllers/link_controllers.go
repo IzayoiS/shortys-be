@@ -30,3 +30,17 @@ func PostLink(c *fiber.Ctx) error {
 		},
 	})
 }
+
+func GetLink(c*fiber.Ctx)error{
+	shortCode := c.Params("shortCode")
+	shortlink,err := service.GetLink(shortCode)
+
+
+	if err != nil {
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+			"error":"ShortLink not found",
+		})
+	}
+
+	return c.Redirect(shortlink.OriginalURL,fiber.StatusTemporaryRedirect)
+}
