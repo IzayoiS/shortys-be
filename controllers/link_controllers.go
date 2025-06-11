@@ -1,8 +1,9 @@
 package controllers
 
 import (
-	"github.com/gofiber/fiber/v2"
 	service "shortsy/service"
+
+	"github.com/gofiber/fiber/v2"
 )
 
 func PostLink(c *fiber.Ctx) error {
@@ -16,31 +17,26 @@ func PostLink(c *fiber.Ctx) error {
 		})
 	}
 
-	url,err := service.PostLink(body.OriginalURL)
+	url, err := service.PostLink(body.OriginalURL)
 	if err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": err.Error()})
 	}
 
 	return c.JSON(fiber.Map{
 		"message": "User registered successfully",
-		"url": fiber.Map{
-			"id":    url.Id,
-			"original_url":  url.OriginalURL,
-			"short": url.ShortCode,
-		},
+		"short": "https://Shortsy/" + url.ShortCode,
 	})
 }
 
-func GetLink(c*fiber.Ctx)error{
+func GetLink(c *fiber.Ctx) error {
 	shortCode := c.Params("shortCode")
-	shortlink,err := service.GetLink(shortCode)
-
+	shortlink, err := service.GetLink(shortCode)
 
 	if err != nil {
 		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
-			"error":"ShortLink not found",
+			"error": "ShortLink not found",
 		})
 	}
 
-	return c.Redirect(shortlink.OriginalURL,fiber.StatusTemporaryRedirect)
+	return c.Redirect(shortlink.OriginalURL, fiber.StatusTemporaryRedirect)
 }
