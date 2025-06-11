@@ -23,8 +23,8 @@ func PostLink(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(fiber.Map{
-		"message": "User registered successfully",
-		"short": "https://Shortsy/" + url.ShortCode,
+		"message": "Successfully shortener link",
+		"short": "http://127.0.0.1:8080/" + url.ShortCode,
 	})
 }
 
@@ -38,5 +38,5 @@ func GetLink(c *fiber.Ctx) error {
 		})
 	}
 
-	return c.Redirect(shortlink.OriginalURL, fiber.StatusTemporaryRedirect)
+	return c.Redirect(shortlink.OriginalURL,fiber.StatusTemporaryRedirect)
 }
