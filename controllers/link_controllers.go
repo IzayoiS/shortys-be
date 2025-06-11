@@ -1,8 +1,8 @@
 package controllers
 
 import (
+	"os"
 	service "shortsy/service"
-
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -10,6 +10,8 @@ func PostLink(c *fiber.Ctx) error {
 	var body struct {
 		OriginalURL string `json:"original_url"`
 	}
+
+	port := os.Getenv("PORT")
 
 	if err := c.BodyParser(&body); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
@@ -24,7 +26,7 @@ func PostLink(c *fiber.Ctx) error {
 
 	return c.JSON(fiber.Map{
 		"message": "Successfully shortener link",
-		"short": "http://127.0.0.1:8080/" + url.ShortCode,
+		"short": "http://127.0.0.1:"+ port + "/" + url.ShortCode,
 	})
 }
 
