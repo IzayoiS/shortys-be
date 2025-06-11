@@ -3,7 +3,6 @@ package controllers
 import (
 	"os"
 	service "shortsy/service"
-
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -11,6 +10,8 @@ func PostLink(c *fiber.Ctx) error {
 	var body struct {
 		OriginalURL string `json:"original_url"`
 	}
+
+	port := os.Getenv("PORT")
 
 	if err := c.BodyParser(&body); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
