@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-
+	"shortsy/config"
 	"shortsy/database"
 	"shortsy/routes"
 
@@ -12,7 +12,7 @@ import (
 )
 
 func main() {
-
+	config.LoadEnv()
 	app := fiber.New()
 	database.Connect()
 	database.Seed(database.DB)
