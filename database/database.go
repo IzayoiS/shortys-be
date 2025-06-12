@@ -2,6 +2,7 @@ package database
 
 import (
 	"log"
+	"os"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -13,7 +14,7 @@ var DB *gorm.DB
 
 func Connect() {
 	
-	dsn := "postgresql://postgres:jTdHHWEMMvl9Cq78@db.brmuhskfoxpfsiegzyyf.supabase.co:5432/postgres"
+	dsn := os.Getenv("DB_URL")
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
 	if err != nil {
 		log.Fatal("Failed to connect database")
