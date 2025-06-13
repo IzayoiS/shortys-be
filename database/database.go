@@ -21,6 +21,5 @@ func Connect() {
 	DB = db
 	log.Println("✅ Connected to PostgreSQL with GORM")
 
-	// AutoMigrate model jika pakai GORM
 	db.AutoMigrate(&model.Shortsy{})
 }
