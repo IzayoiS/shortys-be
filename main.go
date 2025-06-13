@@ -15,6 +15,9 @@ func main() {
 	database.Connect()
 	database.Seed(database.DB)
 	routes.RouterApp(app)
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.SendString("Hello, World!")
+	})
 
 	port := os.Getenv("PORT")
 	log.Println("app berjalan broo")
