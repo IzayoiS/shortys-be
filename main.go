@@ -4,17 +4,25 @@ import (
 	"log"
 	"os"
 
+	"shortsy/config"
 	"shortsy/database"
 	"shortsy/routes"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 )
 
 func main() {
 	app := fiber.New()
+	config.LoadEnv()
 	database.Connect()
 	database.Seed(database.DB)
+	app.Use(cors.New(cors.Config{
+        AllowOrigins: "http://localhost:5173,https://shortsy-be-production-692e.up.railway.app", 
+        AllowHeaders: "Origin, Content-Type",
+    }))
 	routes.RouterApp(app)
+	
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("Hello, World!")
 	})
