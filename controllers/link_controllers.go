@@ -26,7 +26,7 @@ func PostLink(c *fiber.Ctx) error {
 	port := os.Getenv("PORT")
 	return c.JSON(fiber.Map{
 		"message": "Successfully shortener link",
-		"short": "http://127.0.0.1:"+ port + "/" + url.ShortCode,
+		"short": "https://shortsy.up.railway.app:"+ port + "/" + url.ShortCode,
 	})
 }
 
