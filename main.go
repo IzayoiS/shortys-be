@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 
+	"shortsy/config"
 	"shortsy/database"
 	"shortsy/routes"
 
@@ -13,7 +14,7 @@ import (
 
 func main() {
 	app := fiber.New()
-	// config.LoadEnv()
+	config.LoadEnv()
 	database.Connect()
 	database.Seed(database.DB)
 	app.Use(cors.New(cors.Config{
