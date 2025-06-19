@@ -17,7 +17,7 @@ func main() {
 	database.Connect()
 	database.Seed(database.DB)
 	app.Use(cors.New(cors.Config{
-        AllowOrigins: "http://localhost:5173,https://shortsy-web.up.railway.app", 
+        AllowOrigins: "http://localhost:5173,https://shortsy-web.up.railway.app,https://shortsy-web.netlify.app", 
         AllowHeaders: "Origin, Content-Type",
     }))
 	routes.RouterApp(app)
